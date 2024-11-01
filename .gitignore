@@ -1,0 +1,7 @@
+target
+.classpath
+logs/
+*.log
+pom.xml.versionsBackup
+.idea
+*.iml
