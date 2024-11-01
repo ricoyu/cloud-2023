@@ -34,6 +34,7 @@ public class PortalController {
         Map<String, Integer> map = new HashMap<>();
         for (int i = 0; i < 100; i++) {
             String port = restTemplate.getForObject("http://awesome-service/aws/port", String.class);
+            //System.out.println(port);
             Integer count = map.get(port);
             if (count == null) {
                 map.put(port, 1);

@@ -58,3 +58,16 @@ D:\skywalking\bin\startup.bat
    * 通过restTemplate.getForObject("http://awesome-service/aws/port", String.class);来循环调用awesome-service 100次, 拿到端口号
    * 演示了sentinel的限流, 关注限流发生后如何处理的异常
 
+### 1.1.2 组合2 演示自定义负载均衡策略
+
+分支lb-002
+
+基于NacosLoadBalancer实现了自己的WeightedNacosLoadBalancer, 但实际上NacosLoadBalancer已经支持Nacos的权重了
+
+基于SpringCloud原生的Loadbalancer提供的ReactorServiceInstanceLoadBalancer实现了一个最简单的SimpleCustomLoadBalancer, 每次取第一个instance
+
+1. awesome-service
+   * server.port设为0, 就是每次启动分配一个随机端口号, Idea要允许它启动多个instance
+   * 这个不需要连数据库
+2. portal-service
+   * 通过restTemplate.getForObject("http://awesome-service/aws/port", String.class);来循环调用awesome-service 100次, 拿到端口号
