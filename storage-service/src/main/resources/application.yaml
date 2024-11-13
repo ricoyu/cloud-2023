@@ -8,7 +8,7 @@ hibernate.query.mode: loose
 hibernate.query.cache: true
 hibernate.jdbc.batch_size: 100
 server:
-  port: 8083
+  port: 0
 spring:
   application:
     name: storage-service

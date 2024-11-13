@@ -71,3 +71,35 @@ D:\skywalking\bin\startup.bat
    * 这个不需要连数据库
 2. portal-service
    * 通过restTemplate.getForObject("http://awesome-service/aws/port", String.class);来循环调用awesome-service 100次, 拿到端口号
+
+
+
+### 1.1.3 演示配置中心
+
+分支: 003-config-server
+
+Nacos中创建data-id为portal-service.yaml, portal-service-dev.yaml, portal-service-prod.yaml的配置文件
+
+portal-service的ConfigController的属性注入从Nacos中配置文件中来, 并且支持基于spring.profiles.active来切换
+
+http://localhost:8081/name
+
+
+
+### 1.1.4 演示feign基础使用
+
+分支: 004-feign-logging
+
+portal-service调awesome-service, awesome-service Idea要允许它启动多个instance
+
+请求url: http://localhost:8081/portal/port
+
+
+
+### 1.1.5 演示feign配置httpclient5, 超时控制
+
+分支: 005-feign-timeout
+
+portal-service调awesome-service, awesome-service Idea要允许它启动多个instance
+
+请求url: http://localhost:8081/portal/port

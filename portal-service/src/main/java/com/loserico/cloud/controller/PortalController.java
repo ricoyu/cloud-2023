@@ -42,6 +42,16 @@ public class PortalController {
                 map.put(port, count+1);
             }
         }
+        for (int i = 0; i < 100; i++) {
+            String port = restTemplate.getForObject("http://storage-service/storage/port", String.class);
+            //System.out.println(port);
+            Integer count = map.get(port);
+            if (count == null) {
+                map.put(port, 1);
+            }else {
+                map.put(port, count+1);
+            }
+        }
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
         	System.out.println(entry.getKey()+" : " + entry.getValue());
         }

@@ -27,6 +27,9 @@ public class SimpleCustomLoadBalancer implements ReactorServiceInstanceLoadBalan
 
 	private ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider;
 
+	/**
+	 * 这个serviceId实际不需要, 只是为了记log
+	 */
 	private String serviceId;
 
 	public SimpleCustomLoadBalancer(ObjectProvider<ServiceInstanceListSupplier> serviceInstanceListSupplierProvider,

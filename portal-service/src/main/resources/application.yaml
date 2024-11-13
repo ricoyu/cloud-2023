@@ -20,3 +20,11 @@ spring:
         server-addr: localhost:8848
         username: nacos
         password: nacos
+        metadata:
+          version: 1.0.0
+    loadbalancer:
+      enabled: true
+      eager-load:
+        clients:
+          - awesome-service
+#          - storage-service
