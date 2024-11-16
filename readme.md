@@ -72,7 +72,22 @@ D:\skywalking\bin\startup.bat
 2. portal-service
    * 通过restTemplate.getForObject("http://awesome-service/aws/port", String.class);来循环调用awesome-service 100次, 拿到端口号
 
+要覆盖默认的全局负载均衡策略, 必须通过
 
+```java
+@Configuration
+@LoadBalancerClients(
+		//value = {
+		//		@LoadBalancerClient(name = "awesome-service", configuration = LoadBalancerConfig.AwesomeLBConfig.class),
+		//		@LoadBalancerClient(name = "storage-service", configuration = LoadBalancerConfig.StorageLBConfig.class)
+		//}
+		defaultConfiguration = LoadBalancerConfig.DefaultLoadBalancerConfiguration.class
+)
+public class LBConfig {
+}
+```
+
+但是要注意, 不能同时和@LoadBalancerClient一起使用, 否则请求时会报错
 
 ### 1.1.3 演示配置中心
 
