@@ -2,6 +2,8 @@ package com.loserico.cloud.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,12 +24,24 @@ import java.util.Map;
  * @version 1.0
  */
 @Slf4j
+@RefreshScope
 @RestController
 @RequestMapping("/portal")
 public class PortalController {
+
+    @Value("${name}")
+    private String name;
+
+    @Value("${age}")
+    private Integer age;
     
     @Autowired
     private RestTemplate restTemplate;
+
+    @GetMapping("/info")
+    public String info() {
+        return "name: " + name + ", age: " + age;
+    }
 
     @GetMapping("/port")
     public Map<String, Integer> port() {

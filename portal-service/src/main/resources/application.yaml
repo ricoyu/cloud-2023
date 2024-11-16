@@ -12,16 +12,24 @@ management:
 #  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
 #
 spring:
+  profiles:
+    active: prod
   application:
     name: portal-service
+  config:
+    import:
+      - nacos:portal-service.yaml
+      - "nacos:portal-service-${spring.profiles.active:}.yaml"
   cloud:
     nacos:
+      server-addr: localhost:8848
+      username: nacos
+      password: nacos
       discovery:
-        server-addr: localhost:8848
-        username: nacos
-        password: nacos
         metadata:
           version: 1.0.0
+      config:
+        file-extension: yaml
     loadbalancer:
       enabled: true
       eager-load:
