@@ -118,3 +118,12 @@ portal-service调awesome-service, awesome-service Idea要允许它启动多个in
 portal-service调awesome-service, awesome-service Idea要允许它启动多个instance
 
 请求url: http://localhost:8081/portal/timeout-port
+
+
+
+### 1.1.6 feign 拦截器
+
+006-feign-interceptor 演示最基础的一个拦截器示例
+
+请求url: http://localhost:8081/portal/port
+

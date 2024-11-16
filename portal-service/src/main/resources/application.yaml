@@ -43,3 +43,6 @@ spring:
             logger-level: full
             connect-timeout: 1000
             read-timeout: 1000
+          awesome-service:
+            request-interceptors:
+              - com.loserico.cloud.interceptor.DemoInterceptor
