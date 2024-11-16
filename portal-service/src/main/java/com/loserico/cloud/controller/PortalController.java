@@ -1,5 +1,6 @@
 package com.loserico.cloud.controller;
 
+import com.loserico.cloud.api.AwesomeApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -38,6 +39,9 @@ public class PortalController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private AwesomeApi awesomeApi;
+
     @GetMapping("/info")
     public String info() {
         return "name: " + name + ", age: " + age;
@@ -47,7 +51,7 @@ public class PortalController {
     public Map<String, Integer> port() {
         Map<String, Integer> map = new HashMap<>();
         for (int i = 0; i < 100; i++) {
-            String port = restTemplate.getForObject("http://awesome-service/aws/port", String.class);
+            String port = awesomeApi.port();
             //System.out.println(port);
             Integer count = map.get(port);
             if (count == null) {
@@ -56,8 +60,14 @@ public class PortalController {
                 map.put(port, count+1);
             }
         }
+        return map;
+    }
+
+    @GetMapping("/timeout-port")
+    public Map<String, Integer> timeout() {
+        Map<String, Integer> map = new HashMap<>();
         for (int i = 0; i < 100; i++) {
-            String port = restTemplate.getForObject("http://storage-service/storage/port", String.class);
+            String port = awesomeApi.timeout();
             //System.out.println(port);
             Integer count = map.get(port);
             if (count == null) {
@@ -65,9 +75,6 @@ public class PortalController {
             }else {
                 map.put(port, count+1);
             }
-        }
-        for (Map.Entry<String, Integer> entry : map.entrySet()) {
-        	System.out.println(entry.getKey()+" : " + entry.getValue());
         }
         return map;
     }

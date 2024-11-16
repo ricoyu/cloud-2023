@@ -19,6 +19,7 @@
         <module>awesome-service</module>
         <module>portal-service</module>
         <module>storage-service</module>
+        <module>awesome-service-api</module>
     </modules>
 
     <properties>

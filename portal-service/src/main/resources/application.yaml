@@ -36,3 +36,10 @@ spring:
         clients:
           - awesome-service
 #          - storage-service
+    openfeign:
+      client:
+        config:
+          default:
+            logger-level: full
+            connect-timeout: 1000
+            read-timeout: 1000

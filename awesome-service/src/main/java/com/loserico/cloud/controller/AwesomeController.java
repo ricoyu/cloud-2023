@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 @Slf4j
 @RestController
 @RequestMapping("/aws")
@@ -17,6 +19,16 @@ public class AwesomeController {
 	
 	@GetMapping("/port")
 	public String port() {
+		return environment.getProperty("local.server.port");
+	}
+
+	@GetMapping("/timeout")
+	public String timeout() {
+		try {
+			SECONDS.sleep(2);
+		} catch (InterruptedException e) {
+			log.error("", e);
+		}
 		return environment.getProperty("local.server.port");
 	}
 }

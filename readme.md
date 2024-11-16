@@ -117,4 +117,4 @@ portal-service调awesome-service, awesome-service Idea要允许它启动多个in
 
 portal-service调awesome-service, awesome-service Idea要允许它启动多个instance
 
-请求url: http://localhost:8081/portal/port
+请求url: http://localhost:8081/portal/timeout-port
