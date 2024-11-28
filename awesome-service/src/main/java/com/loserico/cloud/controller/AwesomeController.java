@@ -8,16 +8,24 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
+import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 @Slf4j
 @RestController
 @RequestMapping("/aws")
 public class AwesomeController {
-	
+
+	private boolean isRetry = false;
+
+	private String idempotentMarked;
+	AtomicInteger counter = new AtomicInteger(1);
+
 	@Autowired
 	private Environment environment;
-	
+
 	@GetMapping("/port")
 	public String port(@RequestHeader(value = "Idempotent", required = false) String header) {
 		System.out.println("Idempotent header: " + header);
@@ -32,5 +40,20 @@ public class AwesomeController {
 			log.error("", e);
 		}
 		return environment.getProperty("local.server.port");
+	}
+
+	@GetMapping("/retry")
+	public String retry(@RequestHeader("Idempotent") String idempotent) {
+		if (idempotentMarked != null && !idempotentMarked.equals(idempotent)) {
+			counter.set(1);
+		}
+		idempotentMarked = idempotent;
+		System.out.println("第" + counter.getAndIncrement() + "调用了retry");
+		try {
+			MILLISECONDS.sleep(3000);
+		} catch (InterruptedException e) {
+			log.info("超时");
+		}
+		return "ok";
 	}
 }

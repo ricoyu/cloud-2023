@@ -21,17 +21,17 @@
 3. seata TC
 
    ```shell
-D:\seata\bin\seata-server.bat
+   D:\seata\bin\seata-server.bat
    ```
-   
+
    三个微服务里面的schema.sql已经包含了业务表和AT模式需要的undo_log表了
 
 4. Skywalking
 
    ```shell
-D:\skywalking\bin\startup.bat
+   D:\skywalking\bin\startup.bat
    ```
-   
+
    http://localhost:8080/
 
 5. 微服务接入Skywalking, 需要加入一下JVM 参数
@@ -111,7 +111,7 @@ portal-service调awesome-service, awesome-service Idea要允许它启动多个in
 
 
 
-### 1.1.5 演示feign配置httpclient5, 超时控制
+### 1.1.5 feign配置httpclient5, 超时控制
 
 分支: 005-feign-timeout
 
@@ -127,3 +127,10 @@ portal-service调awesome-service, awesome-service Idea要允许它启动多个in
 
 请求url: http://localhost:8081/portal/port
 
+
+
+### 1.1.7 feign 重试机制
+
+007-feign-retry
+
+调用portal-service: http://localhost:8081/portal/retry, 这个接口会调awesomeApi.timeout(), 而AwesomeController#retry方法设置了每次都超时

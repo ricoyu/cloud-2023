@@ -11,6 +11,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.loserico</groupId>
             <artifactId>awesome-service-api</artifactId>
             <version>${project.parent.version}</version>

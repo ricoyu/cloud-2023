@@ -1,6 +1,6 @@
 package com.loserico.cloud.controller;
 
-import com.loserico.cloud.api.AwesomeApi;
+import com.loserico.cloud.api.AwesomeFeignApi;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,7 +40,7 @@ public class PortalController {
     private RestTemplate restTemplate;
 
     @Autowired
-    private AwesomeApi awesomeApi;
+    private AwesomeFeignApi awesomeApi;
 
     @GetMapping("/info")
     public String info() {
@@ -77,5 +77,13 @@ public class PortalController {
             }
         }
         return map;
+    }
+
+    @Autowired
+    private AwesomeFeignApi awesomeFeignApi;
+
+    @GetMapping("/retry")
+    public boolean retry() {
+        return awesomeFeignApi.retry(null);
     }
 }

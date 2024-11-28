@@ -31,11 +31,13 @@ spring:
       config:
         file-extension: yaml
     loadbalancer:
-      enabled: true
       eager-load:
         clients:
           - awesome-service
-#          - storage-service
+      retry:
+        enabled: true
+        max-retries-on-same-service-instance: 3
+        max-retries-on-next-service-instance: 0
     openfeign:
       client:
         config:
@@ -45,4 +47,4 @@ spring:
             read-timeout: 1000
           awesome-service:
             request-interceptors:
-              - com.loserico.cloud.interceptor.DemoInterceptor
+              - com.loserico.cloud.interceptor.IdempotentInterceptor

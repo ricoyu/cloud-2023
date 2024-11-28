@@ -5,7 +5,7 @@ import feign.RequestTemplate;
 
 import java.util.UUID;
 
-public class DemoInterceptor implements RequestInterceptor {
+public class IdempotentInterceptor implements RequestInterceptor {
 
 	@Override
 	public void apply(RequestTemplate template) {
