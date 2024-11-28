@@ -139,6 +139,8 @@ portal-service调awesome-service, awesome-service Idea要允许它启动多个in
 
 ### 1.1.8 httpclient 连接池
 
+008-httpclient-pool
+
 调用portal-service: http://localhost:8081/portal/pool-statistic
 
 下有awesome-service接口故意设置延迟2秒或者不设置延迟
