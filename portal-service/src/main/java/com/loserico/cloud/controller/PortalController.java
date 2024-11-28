@@ -1,6 +1,8 @@
 package com.loserico.cloud.controller;
 
 import com.loserico.cloud.api.AwesomeFeignApi;
+import com.loserico.cloud.component.HttpClientPoolStats;
+import com.loserico.common.lang.concurrent.LoserExecutors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,15 +14,15 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
 
 /**
- *
  * <p/>
  * Copyright: Copyright (c) 2024-10-30 17:22
  * <p/>
  * Company: Sexy Uncle Inc.
  * <p/>
-
+ *
  * @author Rico Yu  ricoyu520@gmail.com
  * @version 1.0
  */
@@ -30,60 +32,90 @@ import java.util.Map;
 @RequestMapping("/portal")
 public class PortalController {
 
-    @Value("${name}")
-    private String name;
+	@Value("${name}")
+	private String name;
 
-    @Value("${age}")
-    private Integer age;
-    
-    @Autowired
-    private RestTemplate restTemplate;
+	@Value("${age}")
+	private Integer age;
 
-    @Autowired
-    private AwesomeFeignApi awesomeApi;
+	@Autowired
+	private RestTemplate restTemplate;
 
-    @GetMapping("/info")
-    public String info() {
-        return "name: " + name + ", age: " + age;
-    }
+	@Autowired
+	private AwesomeFeignApi awesomeApi;
 
-    @GetMapping("/port")
-    public Map<String, Integer> port() {
-        Map<String, Integer> map = new HashMap<>();
-        for (int i = 0; i < 100; i++) {
-            String port = awesomeApi.port();
-            //System.out.println(port);
-            Integer count = map.get(port);
-            if (count == null) {
-                map.put(port, 1);
-            }else {
-                map.put(port, count+1);
-            }
-        }
-        return map;
-    }
+	@Autowired
+	private HttpClientPoolStats httpClientPoolStats;
 
-    @GetMapping("/timeout-port")
-    public Map<String, Integer> timeout() {
-        Map<String, Integer> map = new HashMap<>();
-        for (int i = 0; i < 100; i++) {
-            String port = awesomeApi.timeout();
-            //System.out.println(port);
-            Integer count = map.get(port);
-            if (count == null) {
-                map.put(port, 1);
-            }else {
-                map.put(port, count+1);
-            }
-        }
-        return map;
-    }
+	private static final ExecutorService POOL = LoserExecutors.of("httpClientExecutePool")
+			.corePoolSize(20)
+			.maxPoolSize(500)
+			.build();
 
-    @Autowired
-    private AwesomeFeignApi awesomeFeignApi;
+	@GetMapping("/info")
+	public String info() {
+		return "name: " + name + ", age: " + age;
+	}
 
-    @GetMapping("/retry")
-    public boolean retry() {
-        return awesomeFeignApi.retry(null);
-    }
+	@GetMapping("/port")
+	public Map<String, Integer> port() {
+		Map<String, Integer> map = new HashMap<>();
+		for (int i = 0; i < 100; i++) {
+			String port = awesomeApi.port();
+			//System.out.println(port);
+			Integer count = map.get(port);
+			if (count == null) {
+				map.put(port, 1);
+			} else {
+				map.put(port, count + 1);
+			}
+		}
+		return map;
+	}
+
+	@GetMapping("/timeout-port")
+	public Map<String, Integer> timeout() {
+		Map<String, Integer> map = new HashMap<>();
+		for (int i = 0; i < 100; i++) {
+			String port = awesomeApi.timeout();
+			//System.out.println(port);
+			Integer count = map.get(port);
+			if (count == null) {
+				map.put(port, 1);
+			} else {
+				map.put(port, count + 1);
+			}
+		}
+		return map;
+	}
+
+	@Autowired
+	private AwesomeFeignApi awesomeFeignApi;
+
+	@GetMapping("/retry")
+	public boolean retry() {
+		return awesomeFeignApi.retry(null);
+	}
+
+
+	@GetMapping("/pool-statistic")
+	public Map<String, Integer> poolStatistic() {
+		Map<String, Integer> map = new HashMap<>();
+		for (int i = 0; i < 100; i++) {
+			try {
+				String port = awesomeApi.timeout();
+				//System.out.println(port);
+				Integer count = map.get(port);
+				if (count == null) {
+					map.put(port, 1);
+				} else {
+					map.put(port, count + 1);
+				}
+			} catch (Exception e) {
+
+			}
+			httpClientPoolStats.printPoolStats();
+		}
+		return map;
+	}
 }

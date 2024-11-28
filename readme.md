@@ -134,3 +134,36 @@ portal-service调awesome-service, awesome-service Idea要允许它启动多个in
 007-feign-retry
 
 调用portal-service: http://localhost:8081/portal/retry, 这个接口会调awesomeApi.timeout(), 而AwesomeController#retry方法设置了每次都超时
+
+
+
+### 1.1.8 httpclient 连接池
+
+调用portal-service: http://localhost:8081/portal/pool-statistic
+
+下有awesome-service接口故意设置延迟2秒或者不设置延迟
+
+连接池配置如下:
+
+```yaml
+spring:
+  cloud:
+    openfeign:
+      httpclient:
+        hc5:
+          pool-concurrency-policy: lax
+          pool-reuse-policy: fifo
+        max-connections: 200
+        max-connections-per-route: 50
+```
+
+portal-service打印的连接池信息如下
+
+```
+HttpClient Pool Stats:maxTotal: 200
+Max: 200
+Available: 1
+Leased: 0
+Pending: 0
+```
+
