@@ -51,7 +51,7 @@
         <appender-ref ref="FILE" />
         <appender-ref ref="ERROR_LOG" />
     </root>
-    <!--<logger name="com.loserico.cloud.api" level="DEBUG"/>-->
-    <logger name="com.alibaba.nacos.client.naming" level="ERROR"/>
+    <logger name="com.loserico.cloud.api" level="DEBUG"/>
+    <logger name="com.alibaba.nacos" level="ERROR"/>
 
 </configuration>

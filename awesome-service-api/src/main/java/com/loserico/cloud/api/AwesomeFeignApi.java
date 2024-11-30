@@ -15,4 +15,7 @@ public interface AwesomeFeignApi {
 
 	@GetMapping("/retry")
 	public boolean retry(@RequestHeader("Idempotent") String idempotent);
+
+	@GetMapping("/compression")
+	public String compression();
 }

@@ -39,6 +39,13 @@ spring:
         max-retries-on-same-service-instance: 3
         max-retries-on-next-service-instance: 0
     openfeign:
+      compression:
+        request:
+          enabled: true
+          mime-types: text/plain,text/xml,application/xml,application/json
+          min-request-size: 3
+        response:
+          enabled: true
       httpclient:
         hc5:
           pool-concurrency-policy: strict
@@ -48,7 +55,7 @@ spring:
       client:
         config:
           default:
-            logger-level: full
+            logger-level: HEADERS
             connect-timeout: 1000
             read-timeout: 3000
           awesome-service:

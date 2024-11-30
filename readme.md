@@ -169,3 +169,48 @@ Leased: 0
 Pending: 0
 ```
 
+
+
+### 1.1.9 feign启用压缩
+
+实测没看到压缩的效果 009-feign-compression
+
+portal-service配置了
+
+```yaml
+spring:
+  cloud:
+    openfeign:
+      compression:
+        request:
+          enabled: true
+          mime-types: text/plain,text/xml,application/xml,application/json
+          min-request-size: 3
+        response:
+          enabled: true
+```
+
+PortalController方法
+
+```java
+@GetMapping("/compression")
+public String compression() {
+  awesomeApi.compression();
+  return "";
+}
+```
+
+awesome-service的AwesomeController提供接口
+
+```java
+@GetMapping("/compression")
+public String compression() {
+  String readme = IOUtils.readFileAsString("D:\\Learning\\cloud-2023\\readme.md");
+  System.out.println("字节数: " + readme.getBytes(UTF_8).length);
+  return readme;
+}
+```
+
+readme.md是一个蛮大的文件, 超过了启用压缩的阈值
+
+但是实际调用http://localhost:8081/portal/compression, 通过feign的日志看没有压缩相关请求头出现, 所以还需要进一步研究

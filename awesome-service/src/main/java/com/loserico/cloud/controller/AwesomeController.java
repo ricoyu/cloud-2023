@@ -1,5 +1,6 @@
 package com.loserico.cloud.controller;
 
+import com.loserico.common.lang.utils.IOUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
@@ -55,5 +57,12 @@ public class AwesomeController {
 			log.info("超时");
 		}
 		return "ok";
+	}
+
+	@GetMapping("/compression")
+	public String compression() {
+		String readme = IOUtils.readFileAsString("D:\\Learning\\cloud-2023\\readme.md");
+		System.out.println("字节数: " + readme.getBytes(UTF_8).length);
+		return readme;
 	}
 }

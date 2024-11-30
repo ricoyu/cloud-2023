@@ -118,4 +118,10 @@ public class PortalController {
 		}
 		return map;
 	}
+
+	@GetMapping("/compression")
+	public String compression() {
+		awesomeApi.compression();
+		return "";
+	}
 }
