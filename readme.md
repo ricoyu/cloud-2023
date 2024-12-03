@@ -214,3 +214,11 @@ public String compression() {
 readme.md是一个蛮大的文件, 超过了启用压缩的阈值
 
 但是实际调用http://localhost:8081/portal/compression, 通过feign的日志看没有压缩相关请求头出现, 所以还需要进一步研究
+
+
+
+### 1.1.10 sentinel basic
+
+010-sentinel-basic
+
+基于Java编程方式Sentinel 流控

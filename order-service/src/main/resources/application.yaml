@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: order-service
+  datasource:
+    druid:
+      url: jdbc:mysql://localhost:3306/seata_at_order?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&useCompression=true&useUnicode=true&autoReconnect=true&autoReconnectForPools=true&failOverReadOnly=false
+      username: seata
+      password: 123456
+      initial-size: 10
+      min-idle: 10
+      max-active: 500
+      max-wait: 60000
+      validation-query: SELECT 1
+      validation-query-timeout: 60000
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      keep-alive: false
+      filters: stat,wall
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 1800000
+      pool-prepared-statements: false
+      max-pool-prepared-statement-per-connection-size: -1
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+hibernate.query.mode: loose
+hibernate.query.cache: true
+hibernate.jdbc.batch_size: 100
+
+server:
+  port: 8082
+
