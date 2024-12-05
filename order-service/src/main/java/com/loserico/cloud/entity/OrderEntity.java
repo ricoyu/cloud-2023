@@ -7,18 +7,20 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
 
+import java.time.LocalDateTime;
+
 import static jakarta.persistence.GenerationType.IDENTITY;
 
 
 @Data
 @Entity
-@Table(name = "order_tbl")
+@Table(name = "`order`")
 public class OrderEntity {
 	
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id", updatable = false, nullable = false, unique = true)
-	private Integer id;
+	private Long id;
 	
 	@Column(name = "user_id")
 	private String userId;
@@ -34,8 +36,13 @@ public class OrderEntity {
 	
 	@Column(name = "money")
 	private Integer money;
-	
-	@Column(name = "status")
-	private Integer status;
-	
+
+	/*
+	 * 默认映射的数据库字段类型为TIMESTAMP,改为DATETIME
+	 */
+	@Column(name = "CREATE_TIME", columnDefinition = "DATETIME", nullable = false, length = 19)
+	private LocalDateTime createTime;
+
+	@Column(name = "UPDATE_TIME", columnDefinition = "DATETIME", nullable = false, length = 19)
+	private LocalDateTime updateTime;
 }
