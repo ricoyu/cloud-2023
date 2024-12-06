@@ -1,6 +1,7 @@
 package com.loserico.cloud.service;
 
 import com.loserico.cloud.entity.Storage;
+import com.loserico.common.lang.exception.BusinessException;
 import com.loserico.orm.dao.EntityOperations;
 import com.loserico.orm.dao.SQLOperations;
 import lombok.extern.slf4j.Slf4j;
@@ -33,18 +34,36 @@ public class StorageService {
         Map<String, Object> params = new HashMap<>();
         params.put("commodityCode", commodityCode);
         params.put("count", count);
-        Integer record = sqlOperations.executeUpdate("reduceStorage", params);
-        log.info("扣减 {} 库存结果:{}", commodityCode, record > 0 ? "操作成功" : "扣减库存失败");
+        Integer updateCount = sqlOperations.executeUpdate("reduceStorage", params);
+        if (updateCount == null || updateCount == 0) {
+            throw new BusinessException("扣减库存失败");
+        }
+        log.info("扣减 {} 库存结果:{}", commodityCode, updateCount > 0 ? "操作成功" : "扣减库存失败");
     }
-    
+
+    /**
+     * 剩余库存
+     * @param commodityCode
+     * @return
+     */
+    public Integer getRemainCount(String commodityCode) {
+        Integer stock = sqlOperations.query4One("findByCommodityCode", "commodityCode", commodityCode);
+        return stock;
+    }
+
     private void checkStock(String commodityCode, int count){
         
         log.info("检查 {} 库存", commodityCode);
-        Storage storage = sqlOperations.query4One("findByCommodityCode", "commodityCode", commodityCode, Storage.class);
-        
-        if (storage.getCount() < count) {
+        //Storage storage = sqlOperations.query4One("findByCommodityCode", "commodityCode", commodityCode, Storage.class);
+        //Integer remainCount = storage.getCount();
+                String sql = """
+                SELECT * FROM `storage` WHERE commodity_code = :commodityCode""";
+        Storage storage = sqlOperations.query4One(sql, "commodityCode", commodityCode, Storage.class);
+        Integer remainCount = storage.getCount();
+
+        if (remainCount < count) {
             log.warn("{} 库存不足，当前库存:{}", commodityCode, count);
-            throw new RuntimeException("库存不足");
+            throw new BusinessException("库存不足");
         }
         
     }

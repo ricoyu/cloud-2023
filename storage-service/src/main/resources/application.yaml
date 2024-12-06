@@ -1,3 +1,6 @@
+server:
+  port: 8086
+
 management:
   endpoints:
     web:
@@ -7,8 +10,7 @@ management:
 hibernate.query.mode: loose
 hibernate.query.cache: true
 hibernate.jdbc.batch_size: 100
-server:
-  port: 0
+
 spring:
   application:
     name: storage-service
@@ -20,8 +22,8 @@ spring:
         password: nacos
   datasource:
       druid:
-        url: jdbc:mysql://localhost:3306/seata_at_storage?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&useCompression=true&useUnicode=true&autoReconnect=true&autoReconnectForPools=true&failOverReadOnly=false
-        username: seata
+        url: jdbc:mysql://localhost:3306/tlmall_storage?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&useCompression=true&useUnicode=true&autoReconnect=true&autoReconnectForPools=true&failOverReadOnly=false
+        username: cloud2023
         password: 123456
         initial-size: 10
         min-idle: 10
@@ -38,3 +40,26 @@ spring:
         min-evictable-idle-time-millis: 1800000
         pool-prepared-statements: false
         max-pool-prepared-statement-per-connection-size: -1
+  jpa:
+      properties: 
+        hibernate:
+          dialect: org.hibernate.dialect.MySQLDialect
+          archive:
+            scanner: org.hibernate.boot.archive.scan.internal.StandardScanner #解决新版Hibernate找不到hbm.xml文件问题
+          show_sql: true
+          format_sql: true
+          ddl-auto: none
+          jdbc.batch_size: 100
+          order_inserts: true
+          order_updates: true
+          jdbc.time_zone: Asia/Shanghai
+#          generate_statistics: true
+          cache:
+            use_second_level_cache: false
+            use_query_cache: false
+          entitymanager:
+            class: org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean
+            mappingDirectoryLocations: classpath:named-sql
+          packagesToScan: com.loserico.cloud.entity
+      hibernate:
+        ddl-auto: none #配置hibernate不自动执行ddl是在这里, 而不是上面的spring.jpa.properties.hibernate.ddl-auto        

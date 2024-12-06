@@ -57,7 +57,8 @@ public class AccountService{
      * @return
      */
     public Integer getRemainAccount(String userId) {
-        return sqlOperations.query4One("SELECT money FROM account WHERE user_id = :userId", "userId", userId);
+        //return sqlOperations.query4One("SELECT money FROM account WHERE user_id = :userId", "userId", userId);
+        return sqlOperations.query4One("selectByUserId", "userId", userId);
     }
 
     private void checkBalance(String userId, Integer price) throws BusinessException {

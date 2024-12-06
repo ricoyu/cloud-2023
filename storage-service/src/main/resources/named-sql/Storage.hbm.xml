@@ -3,13 +3,13 @@
 <hibernate-mapping>
     <sql-query name="reduceStorage">
         <![CDATA[
-            UPDATE storage_tbl SET count = count - :count WHERE commodity_code = :commodityCode
+            UPDATE storage SET count = count - :count WHERE commodity_code = :commodityCode
     	]]>
     </sql-query>
 
     <sql-query name="findByCommodityCode">
         <![CDATA[
-            SELECT id,commodity_code,count FROM storage_tbl WHERE commodity_code = :commodityCode
+            SELECT `count` FROM storage WHERE commodity_code = :commodityCode
     	]]>
     </sql-query>
 </hibernate-mapping>

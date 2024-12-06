@@ -9,7 +9,7 @@
 
     <sql-query name="selectByUserId">
         <![CDATA[
-            select id, user_id, money from account_tbl WHERE user_id = :userId
+            select money from account WHERE user_id = :userId
     	]]>
     </sql-query>
 </hibernate-mapping>
