@@ -1,12 +1,5 @@
-server:
-  port: 0
+server.port: 0
   
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-
 spring:
   application:
     name: awesome-service
@@ -14,8 +7,6 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
-        username: nacos
-        password: nacos
     openfeign:
       compression:
         request:
@@ -24,3 +15,5 @@ spring:
           min-request-size: 1
         response:
           enabled: true
+
+management.endpoints.web.exposure.include: '*'

@@ -1,6 +1,16 @@
+server.port: 8082
+
 spring:
   application:
     name: order-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:9090
+#      http-method-specify: true #开启请求方式前缀
   datasource:
     druid:
       url: jdbc:mysql://localhost:3306/tlmall_order?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&useCompression=true&useUnicode=true&autoReconnect=true&autoReconnectForPools=true&failOverReadOnly=false
@@ -21,24 +31,10 @@ spring:
       min-evictable-idle-time-millis: 1800000
       pool-prepared-statements: false
       max-pool-prepared-statement-per-connection-size: -1
-  cloud:
-    nacos:
-      discovery:
-        server-addr: localhost:8848
-    sentinel:
-      transport:
-        dashboard: localhost:9090
-#      http-method-specify: true #开启请求方式前缀
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
 
 hibernate.query.mode: loose
 hibernate.query.cache: true
 hibernate.jdbc.batch_size: 100
 
-server:
-  port: 8082
 
+management.endpoints.web.exposure.include: '*'

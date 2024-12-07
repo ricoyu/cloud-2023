@@ -1,15 +1,5 @@
-server:
-  port: 8083
+server.port: 8083
   
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-
-hibernate.query.mode: loose
-hibernate.query.cache: true
-hibernate.jdbc.batch_size: 100
 spring:
   application:
     name: account-service
@@ -17,8 +7,6 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
-        username: nacos
-        password: nacos
   datasource:
       druid:
         url: jdbc:mysql://localhost:3306/tlmall_account?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&useCompression=true&useUnicode=true&autoReconnect=true&autoReconnectForPools=true&failOverReadOnly=false
@@ -63,3 +51,9 @@ spring:
           packagesToScan: com.loserico.cloud.entity
       hibernate:
         ddl-auto: none #配置hibernate不自动执行ddl是在这里, 而不是上面的spring.jpa.properties.hibernate.ddl-auto
+
+management.endpoints.web.exposure.include: '*'
+
+hibernate.query.mode: loose
+hibernate.query.cache: true
+hibernate.jdbc.batch_size: 100

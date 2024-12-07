@@ -1,26 +1,12 @@
-server:
-  port: 8086
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: '*'
-
-hibernate.query.mode: loose
-hibernate.query.cache: true
-hibernate.jdbc.batch_size: 100
+server.port: 8086
 
 spring:
   application:
     name: storage-service
   cloud:
     nacos:
-      server-addr: localhost:8848
-      username: nacos
-      password: nacos
       discovery:
-        namespace: dev
+        server-addr: localhost:8848
   datasource:
       druid:
         url: jdbc:mysql://localhost:3306/tlmall_storage?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&useCompression=true&useUnicode=true&autoReconnect=true&autoReconnectForPools=true&failOverReadOnly=false
@@ -42,7 +28,7 @@ spring:
         pool-prepared-statements: false
         max-pool-prepared-statement-per-connection-size: -1
   jpa:
-      properties: 
+      properties:
         hibernate:
           dialect: org.hibernate.dialect.MySQLDialect
           archive:
@@ -63,4 +49,10 @@ spring:
             mappingDirectoryLocations: classpath:named-sql
           packagesToScan: com.loserico.cloud.entity
       hibernate:
-        ddl-auto: none #配置hibernate不自动执行ddl是在这里, 而不是上面的spring.jpa.properties.hibernate.ddl-auto        
+        ddl-auto: none #配置hibernate不自动执行ddl是在这里, 而不是上面的spring.jpa.properties.hibernate.ddl-auto
+
+hibernate.query.mode: loose
+hibernate.query.cache: true
+hibernate.jdbc.batch_size: 100
+
+management.endpoints.web.exposure.include: '*'
