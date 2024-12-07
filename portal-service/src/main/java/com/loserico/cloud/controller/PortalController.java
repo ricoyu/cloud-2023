@@ -56,18 +56,17 @@ public class PortalController {
 
 	@GetMapping("/lb-restTemplate")
 	public Result restTemplateLB() {
-		//Map<String, Integer> map = new HashMap<>();
-		//for (int i = 0; i < 100; i++) {
-		//	String port = restTemplate.getForObject("awesome-service", String.class);
-		//	Integer count = map.get(port);
-		//	if (count == null) {
-		//		map.put(port, 1);
-		//	} else {
-		//		map.put(port, count + 1);
-		//	}
-		//}
-		String port = restTemplate.getForObject("awesome-service", String.class);
-		return Results.success().result(port);
+		Map<String, Integer> map = new HashMap<>();
+		for (int i = 0; i < 100; i++) {
+			String port = restTemplate.getForObject("http://awesome-service/aws/port", String.class);
+			Integer count = map.get(port);
+			if (count == null) {
+				map.put(port, 1);
+			} else {
+				map.put(port, count + 1);
+			}
+		}
+		return Results.success().result(map);
 	}
 
 	@GetMapping("/info")
