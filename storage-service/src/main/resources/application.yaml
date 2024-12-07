@@ -17,9 +17,10 @@ spring:
   cloud:
     nacos:
       server-addr: localhost:8848
+      username: nacos
+      password: nacos
       discovery:
-        username: nacos
-        password: nacos
+        namespace: dev
   datasource:
       druid:
         url: jdbc:mysql://localhost:3306/tlmall_storage?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&useCompression=true&useUnicode=true&autoReconnect=true&autoReconnectForPools=true&failOverReadOnly=false

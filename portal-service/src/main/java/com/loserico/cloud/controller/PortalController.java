@@ -3,6 +3,8 @@ package com.loserico.cloud.controller;
 import com.loserico.cloud.api.AwesomeFeignApi;
 import com.loserico.cloud.component.HttpClientPoolStats;
 import com.loserico.common.lang.concurrent.LoserExecutors;
+import com.loserico.common.lang.vo.Result;
+import com.loserico.common.lang.vo.Results;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -51,6 +53,22 @@ public class PortalController {
 			.corePoolSize(20)
 			.maxPoolSize(500)
 			.build();
+
+	@GetMapping("/lb-restTemplate")
+	public Result restTemplateLB() {
+		//Map<String, Integer> map = new HashMap<>();
+		//for (int i = 0; i < 100; i++) {
+		//	String port = restTemplate.getForObject("awesome-service", String.class);
+		//	Integer count = map.get(port);
+		//	if (count == null) {
+		//		map.put(port, 1);
+		//	} else {
+		//		map.put(port, count + 1);
+		//	}
+		//}
+		String port = restTemplate.getForObject("awesome-service", String.class);
+		return Results.success().result(port);
+	}
 
 	@GetMapping("/info")
 	public String info() {
