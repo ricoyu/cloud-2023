@@ -21,6 +21,7 @@
         <module>storage-service</module>
         <module>awesome-service-api</module>
         <module>order-service</module>
+        <module>cloud-common</module>
     </modules>
 
     <properties>
@@ -120,6 +121,11 @@
                 <version>17.0.2</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.loserico</groupId>
+                <artifactId>loser-spring-boot-starter</artifactId>
+                <version>17.0.2</version>
+            </dependency>
             <dependency>
                 <groupId>com.loserico</groupId>
                 <artifactId>loser-spring-boot-web-starter</artifactId>

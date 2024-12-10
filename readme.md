@@ -44,11 +44,21 @@ D:\skywalking\bin\startup.bat
 
 ## 1.1 微服务启动顺序
 
+在D:\Learning\cloud-2023\portal-service\src\main\resources\templates下, 用命令行启动一个nodejs httpserver
+
+```
+http-server -p 80
+```
+
+然后就可以通过页面来发起测试了http://localhost/order.html
+
 ### 1.1.1 组合1 -- 演示 @LoadBalanced
 
 分支 lb-001
 
 测试URL: http://localhost:8081/portal/lb-restTemplate
+
+要启动order, account, storage三个服务, 然后直接可以打开上面的页面来测试 http://localhost/order.html
 
 Ribbon组件已经被官方弃用, @LoadBalanced注解不生效的问题, 添加loadbalance组件即可解决
 

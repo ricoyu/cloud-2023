@@ -5,8 +5,10 @@ server.port: 8081
 #  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
 #
 spring:
+  main:
+    allow-circular-references: true
   profiles:
-    active: prod
+    active: dev
   application:
     name: portal-service
   config:
