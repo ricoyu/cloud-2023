@@ -114,3 +114,15 @@ account和storage设置了不同的read-timeout时间, 演示不同微服务设�
 测试URL http://localhost:8082/order/create
 
 要启动order, account, storage三个服务, 然后直接可以打开上面的页面来测试 http://localhost/order.html
+
+
+
+### 1.1.5 Demo5 --演示feign拦截器
+
+分支 004-feign-interceptor
+
+account和storage设置了不同的read-timeout时间, 演示不同微服务设置不同的超时时间
+
+测试URL http://localhost:8082/order/create
+
+要启动order, account, storage三个服务, 然后直接可以打开上面的页面来测试 http://localhost/order.html

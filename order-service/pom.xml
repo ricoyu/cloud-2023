@@ -138,10 +138,11 @@
             <artifactId>loser-spring-boot-web-starter</artifactId>
             <version>17.0.2</version>
         </dependency>
-        <!--<dependency>
+        <dependency>
             <groupId>com.loserico</groupId>
             <artifactId>loser-spring-cloud-starter</artifactId>
-        </dependency>-->
+            <version>17.0.2</version>
+        </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid-spring-boot-3-starter</artifactId>
