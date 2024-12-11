@@ -20,6 +20,8 @@
         <module>portal-service</module>
         <module>storage-service</module>
         <module>awesome-service-api</module>
+        <module>account-service-api</module>
+        <module>storage-service-api</module>
         <module>order-service</module>
         <module>cloud-common</module>
     </modules>

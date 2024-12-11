@@ -2,6 +2,7 @@ package com.loserico.cloud;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * <p>
@@ -13,7 +14,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Rico Yu ricoyu520@gmail.com
  * @version 1.0
  */
-//@EnableFeignClients
+@EnableFeignClients
 @SpringBootApplication
 public class OrderApplication {
 	

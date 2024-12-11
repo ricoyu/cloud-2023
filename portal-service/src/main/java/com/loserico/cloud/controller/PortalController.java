@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 
@@ -77,7 +79,12 @@ public class PortalController {
 
 	@GetMapping("/info")
 	public Result info() {
-		return Results.success().result("name: " + name + ", age: " + age);
+		List<String[]> msgs = new ArrayList<>();
+		msgs.add(new String[]{"name", name});
+		msgs.add(new String[]{"age", age.toString()});
+		return Results.success()
+				.message(msgs)
+				.result("name: " + name + ", age: " + age);
 	}
 
 	@GetMapping("/port")

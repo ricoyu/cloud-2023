@@ -33,7 +33,7 @@ CREATE TABLE `account`
   AUTO_INCREMENT = 2
   DEFAULT CHARSET = utf8;
 INSERT INTO `account`
-VALUES ('1', 'rico', '3', '2024-08-07 22:53:01', '2024-08-14 13:49:05');
+VALUES ('1', 'rico', '100', '2024-08-07 22:53:01', '2024-08-14 13:49:05');
 
 -- Order订单微服务的数据库业务初始化
 DROP DATABASE IF EXISTS tlmall_order;

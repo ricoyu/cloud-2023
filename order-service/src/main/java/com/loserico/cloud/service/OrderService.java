@@ -1,8 +1,11 @@
 package com.loserico.cloud.service;
 
+import com.loserico.cloud.account.AccountFeignApi;
 import com.loserico.cloud.dto.AccountDTO;
 import com.loserico.cloud.dto.StorageDTO;
 import com.loserico.cloud.entity.OrderEntity;
+import com.loserico.cloud.storage.StorageFeignApi;
+import com.loserico.common.lang.exception.BusinessException;
 import com.loserico.common.lang.vo.Result;
 import com.loserico.orm.dao.CriteriaOperations;
 import com.loserico.orm.dao.EntityOperations;
@@ -23,12 +26,12 @@ import java.util.List;
 @Service
 @Slf4j
 public class OrderService {
-    
-    //@Autowired
-    //private AccountClient accountClient;
-    
-    //@Autowired
-    //private StorageClient storageClient;
+
+    @Autowired
+    private AccountFeignApi accountFeignApi;
+
+    @Autowired
+    private StorageFeignApi storageFeignApi;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -52,17 +55,16 @@ public class OrderService {
         storageDTO.setCommodityCode(commodityCode);
         storageDTO.setCount(count);
 
-        String storageUrl = "http://storage-service/storage/reduce-stock";
-        Result result = restTemplate.postForObject(storageUrl, storageDTO, Result.class);
+        Result result = storageFeignApi.reduceStock(storageDTO);
         // deduct balance
         int price = count * 2;
         AccountDTO accountDTO = new AccountDTO();
         accountDTO.setUserId(userId);
         accountDTO.setPrice(price);
-        //		Integer accountCode = accountService.reduceBalance(accountDTO).getCode();
-        //		if (accountCode.equals(COMMON_FAILED.getCode())) {
-        //			throw new BusinessException("balance not enough");
-        //		}
+        Result accountResult = accountFeignApi.reduceBalance(accountDTO);
+        if (!accountResult.isSuccess()) {
+            throw new BusinessException(accountResult.getCode(), accountResult.getMessageStr());
+        }
         // save order
         OrderEntity order = new OrderEntity();
         order.setUserId(userId);

@@ -60,6 +60,8 @@ http-server -p 80
 
 要启动order, account, storage三个服务, 然后直接可以打开上面的页面来测试 http://localhost/order.html
 
+* 创建订单接口是: http://localhost:8082/order/create
+
 Ribbon组件已经被官方弃用, @LoadBalanced注解不生效的问题, 添加loadbalance组件即可解决
 
 ```xml
