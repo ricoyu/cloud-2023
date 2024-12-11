@@ -85,3 +85,10 @@ Ribbon组件已经被官方弃用, @LoadBalanced注解不生效的问题, 添加
    
      
 
+### 1.1.2 Demo2 -- 演示feign调用
+
+分支 002-feign
+
+测试URL http://localhost:8082/order/create
+
+要启动order, account, storage三个服务, 然后直接可以打开上面的页面来测试 http://localhost/order.html
