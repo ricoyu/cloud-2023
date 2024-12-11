@@ -49,9 +49,4 @@ spring:
         config:
           default:
             logger-level: HEADERS
-            connect-timeout: 1000
-            read-timeout: 3000
-          awesome-api:
-            request-interceptors:
-              - com.loserico.cloud.feign.interceptor.IdempotentInterceptor
 management.endpoints.web.exposure.include: '*'

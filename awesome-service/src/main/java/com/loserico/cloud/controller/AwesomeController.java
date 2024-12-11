@@ -13,7 +13,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static java.util.concurrent.TimeUnit.SECONDS;
 
 @Slf4j
 @RestController
@@ -37,7 +36,7 @@ public class AwesomeController {
 	@GetMapping("/timeout")
 	public String timeout() {
 		try {
-			SECONDS.sleep(2);
+			MILLISECONDS.sleep(100);
 		} catch (InterruptedException e) {
 			log.error("", e);
 		}

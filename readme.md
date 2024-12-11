@@ -148,3 +148,12 @@ account和storage设置了不同的read-timeout时间, 演示不同微服务设�
 第8调用了retry
 ```
 
+### 1.1.7 Demo7 -- 演示 httpclient5 连接池
+
+分支 007-httpclient-pool
+
+启动awesome-service 2个instance, portal-service 1个instance
+
+测试URL http://localhost:8081/portal/pool-statistic
+
+通过HttpClientPoolStats打印连接池情况
