@@ -60,8 +60,17 @@
         </dependency>
         <dependency>
             <groupId>com.loserico</groupId>
+            <artifactId>loser-spring-cloud-starter</artifactId>
+            <version>17.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.loserico</groupId>
             <artifactId>commons-spring</artifactId>
             <version>17.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
         </dependency>
     </dependencies>
 

@@ -119,10 +119,32 @@ account和storage设置了不同的read-timeout时间, 演示不同微服务设�
 
 ### 1.1.5 Demo5 --演示feign拦截器
 
-分支 004-feign-interceptor
+分支 005-feign-interceptor
 
 account和storage设置了不同的read-timeout时间, 演示不同微服务设置不同的超时时间
 
 测试URL http://localhost:8082/order/create
 
 要启动order, account, storage三个服务, 然后直接可以打开上面的页面来测试 http://localhost/order.html
+
+### 1.1.6 Demo6 -- 演示feign重试机制
+
+分支 006-feign-retry
+
+启动awesome-service, portal-service, 各起一个instance即可
+
+测试URL http://localhost:8081/portal/retry
+
+可以在awesome-service控制台看到输出
+
+```
+第1调用了retry
+第2调用了retry
+第3调用了retry
+第4调用了retry
+第5调用了retry
+第6调用了retry
+第7调用了retry
+第8调用了retry
+```
+

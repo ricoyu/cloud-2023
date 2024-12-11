@@ -30,7 +30,7 @@ spring:
       retry:
         enabled: true
         max-retries-on-same-service-instance: 3
-        max-retries-on-next-service-instance: 0
+        max-retries-on-next-service-instance: 1
     openfeign:
       compression:
         request:
@@ -51,8 +51,7 @@ spring:
             logger-level: HEADERS
             connect-timeout: 1000
             read-timeout: 3000
-          awesome-service:
+          awesome-api:
             request-interceptors:
-              - com.loserico.cloud.interceptor.IdempotentInterceptor
-
+              - com.loserico.cloud.feign.interceptor.IdempotentInterceptor
 management.endpoints.web.exposure.include: '*'
