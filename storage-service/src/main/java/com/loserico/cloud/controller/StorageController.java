@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 @RestController
 @RequestMapping("/storage")
 public class StorageController {
@@ -32,6 +34,11 @@ public class StorageController {
 	 */
 	@PostMapping("/reduce-stock")
 	public Result reduceStock(@RequestBody StorageDTO storageDTO) {
+		try {
+			SECONDS.sleep(2);
+		} catch (InterruptedException e) {
+			throw new RuntimeException(e);
+		}
 		storageService.deduct(storageDTO.getCommodityCode(), storageDTO.getCount());
 		return Results.success().build();
 	}

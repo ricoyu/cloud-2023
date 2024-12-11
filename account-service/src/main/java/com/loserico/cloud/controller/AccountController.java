@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import static java.util.concurrent.TimeUnit.SECONDS;
+
 /**
  * @author Fox
  */
@@ -34,6 +36,11 @@ public class AccountController {
 	@PostMapping("/reduce-balance")
 	public Result reduceBalance(@RequestBody AccountDTO accountDTO) {
 		try {
+			try {
+				SECONDS.sleep(2);
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
 			accountService.reduceBalance(accountDTO.getUserId(), accountDTO.getPrice());
 		}
 		catch (BusinessException e) {
