@@ -51,6 +51,6 @@
         <appender-ref ref="FILE" />
         <appender-ref ref="ERROR_LOG" />
     </root>
-    <logger name="com.alibaba.nacos" level="ERROR"/>
+    <logger name="com.alibaba.nacos" level="debug"/>
 
 </configuration>

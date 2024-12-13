@@ -9,6 +9,10 @@ spring:
     nacos:
       discovery:
         server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:9090
+      web-context-unify: false
     openfeign:
       client:
         config:

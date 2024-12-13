@@ -1,28 +1,23 @@
 server.port: 8081
 
-##这是默认的负载均衡策略, ribbon是顶级配置项, 不在spring:下面
-#ribbon:
-#  NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
-#
 spring:
-  main:
-    allow-circular-references: true
   profiles:
     active: dev
   application:
     name: portal-service
   config:
     import:
+      - optional:nacos:boot-common.yaml
       - nacos:portal-service.yaml
-      - "nacos:portal-service-${spring.profiles.active:}.yaml"
+      - nacos:portal-service-${spring.profiles.active:}.yaml
   cloud:
     nacos:
+      server-addr: localhost:8848
       discovery:
-        server-addr: localhost:8848
         metadata:
           version: 1.0.0
-      config:
-        file-extension: yaml
+#      config:
+#        file-extension: yaml
     loadbalancer:
       eager-load:
         clients:
@@ -31,6 +26,9 @@ spring:
         enabled: true
         max-retries-on-same-service-instance: 3
         max-retries-on-next-service-instance: 1
+    sentinel:
+      transport:
+        dashboard: localhost:9090
     openfeign:
       compression:
         request:
@@ -49,4 +47,3 @@ spring:
         config:
           default:
             logger-level: HEADERS
-management.endpoints.web.exposure.include: '*'

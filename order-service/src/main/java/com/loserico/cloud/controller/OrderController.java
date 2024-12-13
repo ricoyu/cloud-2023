@@ -53,4 +53,10 @@ public class OrderController {
 		return Results.success().result(orders);
 	}
 
+	@GetMapping("/findOrderByUserId2/{userId}")
+	public Result findOrderByUserId2(@PathVariable String userId) {
+		List<OrderEntity> orders = orderService.findOrderByUserId(userId);
+		return Results.success().result(orders);
+	}
+
 }

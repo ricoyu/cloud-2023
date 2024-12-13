@@ -1,5 +1,6 @@
 package com.loserico.cloud.service;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.loserico.cloud.account.AccountFeignApi;
 import com.loserico.cloud.dto.AccountDTO;
 import com.loserico.cloud.dto.StorageDTO;
@@ -78,7 +79,8 @@ public class OrderService {
 
         return order.getId();
     }
-    
+
+    @SentinelResource("/service/findOrderByUserId")
     public List<OrderEntity> findOrderByUserId(String userId) {
         List<OrderEntity> orders = criteriaOperations.find(OrderEntity.class, "userId", userId);
         return orders;
