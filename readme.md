@@ -160,7 +160,7 @@ account和storage设置了不同的read-timeout时间, 演示不同微服务设�
 
 ### 1.1.8 Demo8 -- 演示Nacos配置中心
 
-分支 008-nacis-config
+分支 008-nacos-config
 
 启动portal-service 1个instance
 
