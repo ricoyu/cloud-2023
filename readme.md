@@ -158,6 +158,8 @@ account和storage设置了不同的read-timeout时间, 演示不同微服务设�
 
 通过HttpClientPoolStats打印连接池情况
 
+
+
 ### 1.1.8 Demo8 -- 演示Nacos配置中心
 
 分支 008-nacos-config
@@ -165,3 +167,19 @@ account和storage设置了不同的read-timeout时间, 演示不同微服务设�
 启动portal-service 1个instance
 
 测试URL: http://localhost:8081/portal/info
+
+
+
+### 1.1.9 Demo9 -- 演示Seata分布式事务
+
+分支 003-seata
+
+启动order-service, storage-service, account-service
+
+测试URL: http://localhost:8082/order/create
+
+**参数:**
+
+* userId: rico
+* commodityCode: 1
+* count: 100
