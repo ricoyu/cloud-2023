@@ -3,10 +3,12 @@ server.port: 8083
 spring:
   application:
     name: account-service
+  config:
+    import:
+      - optional:nacos:seata-client.yaml
   cloud:
     nacos:
-      discovery:
-        server-addr: localhost:8848
+      server-addr: localhost:8848
   datasource:
       druid:
         url: jdbc:mysql://localhost:3306/tlmall_account?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&useCompression=true&useUnicode=true&autoReconnect=true&autoReconnectForPools=true&failOverReadOnly=false

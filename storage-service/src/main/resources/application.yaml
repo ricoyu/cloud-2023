@@ -3,10 +3,12 @@ server.port: 8086
 spring:
   application:
     name: storage-service
+  config:
+    import:
+      - optional:nacos:seata-client.yaml
   cloud:
     nacos:
-      discovery:
-        server-addr: localhost:8848
+      server-addr: localhost:8848
   datasource:
       druid:
         url: jdbc:mysql://localhost:3306/tlmall_storage?serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&useLegacyDatetimeCode=false&useCompression=true&useUnicode=true&autoReconnect=true&autoReconnectForPools=true&failOverReadOnly=false
@@ -56,3 +58,6 @@ hibernate.query.cache: true
 hibernate.jdbc.batch_size: 100
 
 management.endpoints.web.exposure.include: '*'
+loser:
+  idemtotent:
+    enabled: true

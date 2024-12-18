@@ -64,7 +64,7 @@ public class AccountService{
     private void checkBalance(String userId, Integer price) throws BusinessException {
         Integer balance = sqlOperations.query4One("SELECT money FROM account WHERE user_id = :userId", "userId", userId);
         if (balance < price) {
-            throw new BusinessException("no enough balance");
+            throw new BusinessException("余额不足");
         }
     }
 }

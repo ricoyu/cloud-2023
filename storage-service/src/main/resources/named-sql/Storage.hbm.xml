@@ -3,7 +3,7 @@
 <hibernate-mapping>
     <sql-query name="reduceStorage">
         <![CDATA[
-            UPDATE storage SET count = count - :count WHERE commodity_code = :commodityCode
+            UPDATE storage SET count = count - :count WHERE commodity_code = :commodityCode and count >= :count
     	]]>
     </sql-query>
 

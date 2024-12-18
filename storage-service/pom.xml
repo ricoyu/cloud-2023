@@ -67,6 +67,10 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.loserico</groupId>
             <artifactId>loser-spring-boot-web-starter</artifactId>
         </dependency>
@@ -74,6 +78,10 @@
             <groupId>com.loserico</groupId>
             <artifactId>loser-spring-cloud-starter</artifactId>
             <version>17.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-seata</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

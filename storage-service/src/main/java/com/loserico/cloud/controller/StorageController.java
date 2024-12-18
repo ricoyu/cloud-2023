@@ -6,7 +6,6 @@ import com.loserico.common.lang.vo.Result;
 import com.loserico.common.lang.vo.Results;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,10 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/storage")
 public class StorageController {
 
-
-	@Autowired
-	private Environment environment;
-
 	@Autowired
 	private StorageService storageService;
 
@@ -33,6 +28,7 @@ public class StorageController {
 	 * @param storageDTO
 	 * @return
 	 */
+	//@Idempotent
 	@PostMapping("/reduce-stock")
 	public Result reduceStock(@RequestBody StorageDTO storageDTO, @RequestHeader(value = "Idempotent", required = false) String idempotent) {
 		log.info("idempotent: {}", idempotent);
