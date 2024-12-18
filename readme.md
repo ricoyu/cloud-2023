@@ -172,7 +172,7 @@ account和storage设置了不同的read-timeout时间, 演示不同微服务设�
 
 ### 1.1.9 Demo9 -- 演示Seata分布式事务
 
-分支 003-seata
+分支 009-seata
 
 启动order-service, storage-service, account-service
 
