@@ -25,6 +25,9 @@ spring:
             read-timeout: 100000
             request-interceptors:
               - com.loserico.cloud.feign.interceptor.IdempotentInterceptor
+          order-service:
+            request-interceptors:
+              - com.loserico.cloud.sentinel.auth.AuthFlowInterceptor
     loadbalancer:
       retry:
         enabled: true
@@ -58,3 +61,6 @@ hibernate.query.cache: true
 hibernate.jdbc.batch_size: 100
 
 management.endpoints.web.exposure.include: '*'
+loser:
+  mvc:
+    rest-exception-advice-enabled: false

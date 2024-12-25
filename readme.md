@@ -5,7 +5,7 @@
 1. nacos
 
    ```shell
-   D:\nacos\bin\startup.cmd -m standalone
+   D:\cloud-2023\nacos\bin\startup.cmd -m standalone
    ```
 
 2. sentinel
@@ -13,7 +13,7 @@
    就在本项目根目录下, 是一个持久化规则到Nacos的修改版本, 网关规则持久化也做了
 
    ```shell
-   java -jar -Dserver.port=9090 D:\Learning\awesome-cloud\sentinel-dashboard.jar
+   java -jar -Dserver.port=9090 D:\Learning\cloud-2023\sentinel-dashboard.jar
    ```
 
    http://localhost:9090/
@@ -183,3 +183,56 @@ account和storage设置了不同的read-timeout时间, 演示不同微服务设�
 * userId: rico
 * commodityCode: 1
 * count: 100
+
+### 1.1.10 Sentinel 限流
+
+分支 010-sentinel-dashboard
+
+项目根目录下的sentinel-dashboard.jar已经对FlowRule, ParamFlowRule做了规则持久化到Nacos, 并且测试通过
+
+微服务要在application.yaml添加配置
+
+```yaml
+spring:
+  cloud:
+    sentinel:
+      web-context-unify: false
+      transport:
+        dashboard: localhost:9090
+      datasource:
+        #流控规则 名称是自己取的, 见名知意就好了
+        flow:
+          nacos:
+            server-addr: localhost:8848
+            data-id: ${spring.application.name}-flow-rules
+            group-id: SENTINEL_GROUP
+            data-type: json
+            rule-type: flow
+        #降级规则
+        degrade:
+          nacos:
+            server-addr: localhost:8848
+            data-id: ${spring.application.name}-degrade-rules
+            group-id: SENTINEL_GROUP
+            data-type: json
+            rule-type: degrade
+        paramFlow:
+          nacos:
+            server-addr: localhost:8848
+            data-id: ${spring.application.name}-param-rules
+            group-id: SENTINEL_GROUP
+            data-type: json
+            rule-type: param-flow  
+```
+
+portal-service已经添加了热点参数和流控的接口方法了
+
+* 直接流控
+
+  http://localhost:8081/sentinel/direct-flow
+
+* 热点参数
+
+  http://localhost:8081/sentinel/orders
+
+先ApiFox点一次接口, 使得簇点链路可以在sentinel-dashboard出现, 然后添加规则即可

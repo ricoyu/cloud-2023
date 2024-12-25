@@ -18,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * <p/>
@@ -49,6 +50,8 @@ public class PortalController {
 
 	@Autowired
 	private HttpClientPoolStats httpClientPoolStats;
+
+	private AtomicInteger counter = new AtomicInteger(1);
 
 	private static final ExecutorService POOL = LoserExecutors.of("httpClientExecutePool")
 			.corePoolSize(20)
@@ -100,7 +103,7 @@ public class PortalController {
 	@GetMapping("/timeout-port")
 	public Map<String, Integer> timeout() {
 		Map<String, Integer> map = new HashMap<>();
-		for (int i = 0; i < 100; i++) {
+		for (int i = 0; i < 2; i++) {
 			String port = awesomeApi.timeout();
 			//System.out.println(port);
 			Integer count = map.get(port);
@@ -144,5 +147,15 @@ public class PortalController {
 	public String compression() {
 		awesomeApi.compression();
 		return "";
+	}
+
+	@GetMapping("/excep")
+	public Result exception() {
+		counter.getAndIncrement();
+		if (counter.get() %2 ==0) {
+			int i = 1/0;
+		}
+
+		return Results.success().build();
 	}
 }

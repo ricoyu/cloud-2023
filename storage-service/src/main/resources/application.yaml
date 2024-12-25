@@ -61,3 +61,5 @@ management.endpoints.web.exposure.include: '*'
 loser:
   idemtotent:
     enabled: true
+  sentinel:
+    sentinel-auth-enabled: true

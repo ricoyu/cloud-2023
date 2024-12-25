@@ -1,5 +1,6 @@
 package com.loserico.cloud.controller;
 
+import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.loserico.cloud.entity.OrderEntity;
 import com.loserico.cloud.service.OrderService;
 import com.loserico.common.lang.vo.Result;
@@ -34,6 +35,7 @@ public class OrderController {
 	private OrderService orderService;
 
 	@PostMapping("/create")
+	@SentinelResource("createOrder")
 	public Result createOrder(@RequestParam("userId") String userId,
 	                             @RequestParam("commodityCode") String commodityCode,
 	                             @RequestParam("count") Integer count) {

@@ -11,6 +11,10 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-datasource-nacos</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.loserico</groupId>
             <artifactId>awesome-service-api</artifactId>
             <version>${project.parent.version}</version>
@@ -68,6 +72,14 @@
         </dependency>
         <dependency>
             <groupId>com.loserico</groupId>
+            <artifactId>commons-lang</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.loserico</groupId>
+            <artifactId>commons-spring</artifactId>
+        </dependency>
+        <!--<dependency>
+            <groupId>com.loserico</groupId>
             <artifactId>loser-spring-boot-web-starter</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
@@ -76,11 +88,7 @@
             <artifactId>loser-spring-cloud-starter</artifactId>
             <version>17.0.2</version>
         </dependency>
-        <dependency>
-            <groupId>com.loserico</groupId>
-            <artifactId>commons-spring</artifactId>
-            <version>17.0.2</version>
-        </dependency>
+        -->
         <dependency>
             <groupId>org.springframework.retry</groupId>
             <artifactId>spring-retry</artifactId>

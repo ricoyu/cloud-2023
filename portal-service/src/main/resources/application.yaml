@@ -27,8 +27,33 @@ spring:
         max-retries-on-same-service-instance: 3
         max-retries-on-next-service-instance: 1
     sentinel:
+      web-context-unify: false
       transport:
         dashboard: localhost:9090
+      datasource:
+        #流控规则 名称是自己取的, 见名知意就好了
+        flow:
+          nacos:
+            server-addr: localhost:8848
+            data-id: ${spring.application.name}-flow-rules
+            group-id: SENTINEL_GROUP
+            data-type: json
+            rule-type: flow
+        #降级规则
+        degrade:
+          nacos:
+            server-addr: localhost:8848
+            data-id: ${spring.application.name}-degrade-rules
+            group-id: SENTINEL_GROUP
+            data-type: json
+            rule-type: degrade
+        paramFlow:
+          nacos:
+            server-addr: localhost:8848
+            data-id: ${spring.application.name}-param-rules
+            group-id: SENTINEL_GROUP
+            data-type: json
+            rule-type: param-flow
     openfeign:
       compression:
         request:
@@ -47,3 +72,9 @@ spring:
         config:
           default:
             logger-level: HEADERS
+
+loser:
+  mvc:
+    rest-exception-advice-enabled: false
+  sentinel:
+    rest-exception-enabled: false

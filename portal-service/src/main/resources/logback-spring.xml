@@ -51,6 +51,6 @@
         <appender-ref ref="FILE" />
         <appender-ref ref="ERROR_LOG" />
     </root>
-    <logger name="com.alibaba.nacos" level="debug"/>
+    <logger name="com.alibaba.csp.sentinel" level="info"/>
 
 </configuration>
