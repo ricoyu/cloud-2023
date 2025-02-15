@@ -16,6 +16,29 @@ spring:
       transport:
         dashboard: localhost:9090
       web-context-unify: false
+      datasource:
+#        flow:
+#          nacos:
+#            server-addr: localhost:8848
+#            data-id: order-service-flow-rules
+#            group-id: SENTINEL_GROUP
+#            data-type: json
+#            rule-type: flow
+#        #降级规则
+#        degrade:
+#          nacos:
+#            server-addr: localhost:8848
+#            data-id: ${spring.application.name}-degrade-rules
+#            group-id: SENTINEL_GROUP
+#            data-type: json
+#            rule-type: degrade
+        paramFlow:
+          nacos:
+            server-addr: localhost:8848
+            data-id: ${spring.application.name}-param-rules
+            group-id: SENTINEL_GROUP
+            data-type: json
+            rule-type: param_flow
     openfeign:
       client:
         config:

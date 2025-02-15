@@ -24,6 +24,7 @@
         <module>storage-service-api</module>
         <module>order-service</module>
         <module>cloud-common</module>
+        <module>oauth-service</module>
     </modules>
 
     <properties>
@@ -122,7 +123,16 @@
                 <artifactId>loser-token-parser</artifactId>
                 <version>17.0.2</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.loserico</groupId>
+                <artifactId>loser-security</artifactId>
+                <version>17.0.2</version>
+            </dependency>
+            <dependency>
+                <groupId>com.loserico</groupId>
+                <artifactId>loser-spring-boot-oauth2</artifactId>
+                <version>17.0.2</version>
+            </dependency>
             <dependency>
                 <groupId>com.loserico</groupId>
                 <artifactId>loser-spring-boot-starter</artifactId>
